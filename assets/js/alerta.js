@@ -1,0 +1,1 @@
+$("#hola").attr("class", "text-primary");
