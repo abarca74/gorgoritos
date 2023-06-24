@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div id="prueba"></div>
+    <div id="premio"></div>
+   
+    {% block javascripts %}
+        
+        {{ encore_entry_script_tags('otro') }}
+    {% endblock %}
+{% endblock %}
