@@ -39,6 +39,14 @@ class EventosRepository extends ServiceEntityRepository
         }
     }
 
+    public function listaEventos(): array 
+    {
+        return $this->createQueryBuilder('e')
+                    ->select('e.nombre, e.fecha')
+                    ->getQuery()
+                    ->getResult();
+
+    }
 //    /**
 //     * @return Eventos[] Returns an array of Eventos objects
 //     */

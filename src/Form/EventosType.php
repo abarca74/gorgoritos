@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Eventos;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class EventosType extends AbstractType
 {
@@ -13,7 +16,9 @@ class EventosType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('fecha')
+            ->add('fecha', DateTimeType::class, [
+                'date_widget' => 'single_text'
+            ])
             ->add('hora')
             ->add('plazasTotales')
             ->add('plazasOcupadas')
