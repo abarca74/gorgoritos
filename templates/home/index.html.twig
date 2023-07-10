@@ -3,37 +3,16 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
+    {{ dump(eventos) }}
     <div class="row">
-    {{ dump(data) }}
-        <div class="col-4" id="calendar-holder"></div>
-        <div class="col-8 text-center"><h1 id="hola"></h1></div>
+       
+        <div {{ react_component('calendar', {'events': 'eventos|raw'})}} class="col-4" id="calendar-holder"></div>
+        <div class="col-8 text-center">
+        <h1>hola mundo</h1>
+        </div>
         
     </div>        
       
 {% endblock %}
 
-{% block javascripts %}
-    <script>
-        window.onload = () => {
-            let calendarEl = document.querySelector("#calendar-holder")
 
-            let calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'es',
-                timeZone: 'Europe/Madrid',
-                headerToolbar:{
-                    start: 'prev,next today',
-                    center: 'title',
-                    end: 'dayGridMonth, timeGridWeek'
-                },
-                events: {{data|raw}}
-            })
-
-            calendar.render()
-        }
-    
-    
-    </script>
-    
-    
-{% endblock %}

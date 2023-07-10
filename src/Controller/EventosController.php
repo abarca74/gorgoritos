@@ -13,30 +13,40 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/eventos')]
 class EventosController extends AbstractController
 {
-    #[Route('/', name: 'app_eventos_index', methods: ['GET'])]
+    #[Route('/', name: 'app_eventos_index', methods: ['GET', 'POST'])]
     public function index(EventosRepository $eventosRepository): Response
-    {
-        return $this->render('eventos/index.html.twig', [
-            'eventos' => $eventosRepository->findAll(),
+    {   
+        $eventos = $eventosRepository->findAll();
+        
+       return $this->render('eventos/index.html.twig', [
+            'eventos' => $eventos,
+            
+           
         ]);
+       
     }
 
     #[Route('/new', name: 'app_eventos_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EventosRepository $eventosRepository): Response
     {
+
         $evento = new Eventos();
         $form = $this->createForm(EventosType::class, $evento);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventosRepository->save($evento, true);
 
             return $this->redirectToRoute('app_eventos_index', [], Response::HTTP_SEE_OTHER);
+           
+            
         }
 
-        return $this->renderForm('eventos/new.html.twig', [
+        return $this->render('eventos/new.html.twig', [
             'evento' => $evento,
             'form' => $form,
+           
         ]);
     }
 

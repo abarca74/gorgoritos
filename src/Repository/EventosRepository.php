@@ -42,7 +42,7 @@ class EventosRepository extends ServiceEntityRepository
     public function listaEventos(): array 
     {
         return $this->createQueryBuilder('e')
-                    ->select('e.nombre, e.fecha')
+                    ->select('e.id, e.nombre, e.fecha')
                     ->getQuery()
                     ->getResult();
 
